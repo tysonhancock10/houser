@@ -8,6 +8,7 @@ require('dotenv').config()
 
 massive(process.env.CONNECTION_STRING).then(dbInstance => {
     app.set('db', dbInstance)
+    // console.log(dbInstance)
   }).catch(err => console.log(err));
 
   app.get('/api/houses', ctrl.getHouses)

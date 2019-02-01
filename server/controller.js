@@ -14,8 +14,8 @@ module.exports = {
         const { house_name, house_address, city, state, zip } = req.body;
         console.log(req.body)
         dbInstance.add_houses([ house_name, house_address, city, state, zip ])
-        // console.log(dbInstance.add_houses)
-        .then( () => res.sendStatus(200) )
+        // console.log(house_name, house_address, city, state, zip)
+        .then( (body) =>  res.status(200).send(body) )
         .catch( err => {
             res.status(500).send({errorMessage: "didnt work"});
             console.log(err)
@@ -27,6 +27,7 @@ module.exports = {
     deleteHouses: (req, res, next) => {
         const dbInstance = req.app.get('db');
         const {params} = req
+        console.log(params)
         console.log(req)
         dbInstance.delete_product([ params.id ])
         .then( () => res.sendStatus(200) )

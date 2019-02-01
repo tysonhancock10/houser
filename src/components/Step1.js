@@ -1,6 +1,9 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {ChangeStepOne} from '../ducks/reducer'
+
 
 class Step1 extends Component{
     constructor(props){
@@ -50,14 +53,17 @@ class Step1 extends Component{
               zip: this.state.zip
 
             }
-            axios.post('4000/api/houses', bodyObj)
+            
+            axios.post('/api/houses', bodyObj)
             .then(response => { 
+                console.log(response)
               this.setState({
                   houses: response.data
                 })
             })
         }
             render(){
+                
                 return(
             <div>
                 <Link to='/step2'><button>Next Step</button></Link>
@@ -83,4 +89,18 @@ class Step1 extends Component{
                 )
             }
         }
-        export default Step1
+
+        function mapStateToProps(state){
+            return{
+                name: state.house_name,
+                address: state.house_address,
+                city: state.city,
+                state: state.state,
+                zip: state.zip
+            }
+        } 
+        // name: state.name,
+        // age: state.age,
+        // email: state.email,
+        // phoneNumber: state.phoneNumber
+        export default connect(mapStateToProps, {ChangeStepOne}) (Step1)

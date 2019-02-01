@@ -2,29 +2,35 @@ import React, {Component} from 'react'
 import axios from 'axios'
 // import {connect} from 'react-redux'
 
-const House =(props) => {
-  
+class House extends Component {
     
+    handleDeleteHouses(id){
+        axios.delete(`http://localhost:4000/api/houses/${id}`)
+        .then(response => {
+            console.log(response)
+
+            this.setState({
+                
+                    houses: response.data
+                
+            })
+        })
+    }
+    render(){
+
+
     return(
+
         <div>
-            <p>{props.name}</p>
-           <p>{props.address}</p>
-           <p>{props.city}</p>
-           <p>{props.state}</p>
-           <p>{props.zip}</p>
-           <button  onClick={() => mapStateToProps(this.state)}>Delete</button>
+            <p>{this.props.name}</p>
+           <p>{this.props.address}</p>
+           <p>{this.props.city}</p>
+           <p>{this.props.state}</p>
+           <p>{this.props.zip}</p>
+           <button onClick= {() => this.handleDeleteHouses()}>Delete</button>
         </div>
     )
+    }
 }
 
-function mapStateToProps(state){
-    return{
-        name: '',
-        address:'',
-        city: '',
-        state:'',
-        zip: 0
-    }
-} 
-// connect(mapStateToProps)
     export default  (House)

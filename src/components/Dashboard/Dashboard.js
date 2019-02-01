@@ -27,7 +27,7 @@ class Dashboard extends Component{
           this.handleGetHouses()
         }
 
-        handleDeleteHouses(id){
+    handleDeleteHouses(id){
             axios.delete(`http://localhost:4000/api/houses/${id}`)
             .then(response => {
                 console.log(response)

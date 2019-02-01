@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
+import { connect } from 'react-redux';
+import {changeStepTwo} from '../ducks/reducer'
 
 class Step2 extends Component{
     constructor(){
@@ -29,4 +31,9 @@ class Step2 extends Component{
         )
     }
 }
-export default Step2
+function mapStateToProps(state){
+    return{
+        image: state.image
+    }
+} 
+export default connect(mapStateToProps, {changeStepTwo}) (Step2)
